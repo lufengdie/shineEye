@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+    
+    <RelativeLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlue"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip">
+        
+        <TextView android:id="@+id/ledControlNameTv" 
+            android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:padding="10dip"
+	        android:gravity="center"
+	        android:text="@string/titleLedEdit"
+	        style="@style/titleTextStyle"/>
+		
+        <TextView android:id="@+id/backBtn"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_centerVertical="true"
+		    android:drawableLeft="@drawable/arrow_left"
+		    android:gravity="center"
+		    android:textColor="@color/white"
+		    android:text="@string/titleLed"/>
+		
+		<Button android:id="@+id/addBtn"
+		    android:layout_width="20dip"
+		    android:layout_height="20dip"
+		    android:onClick="onClick"
+		    android:layout_alignParentRight="true"
+		    android:layout_centerVertical="true"
+		    android:background="@drawable/btn_add"/>
+        
+    </RelativeLayout>
+
+   	<ScrollView android:layout_width="fill_parent"
+       android:layout_height="fill_parent"
+       android:scrollbars="none">
+       
+		<LinearLayout android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical"
+		    android:padding="8dip">
+		    
+		    <!-- 开关、小夜灯 -->
+		    <LinearLayout android:layout_width="fill_parent"
+		        android:layout_height="@dimen/ledControlRowHight"
+		        android:orientation="horizontal"
+		        android:background="@drawable/shape">
+		        
+		        <TextView android:id="@+id/ledPowerTv"
+		            android:layout_height="fill_parent"
+		            android:layout_width="0dip"
+		            android:layout_weight="1.0"
+		            android:text="@string/ledPower"
+		            style="@style/ledTextStyle"/>
+		        
+		        <TextView android:id="@+id/ledNightlightTv"
+		            android:layout_height="fill_parent"
+		            android:layout_width="0dip"
+		            android:layout_weight="1.0"
+		            style="@style/ledTextStyle"
+		            android:text="@string/ledNightlight"/>
+		        
+		    </LinearLayout>
+		    
+		    <!-- 分组选择 -->
+		    <LinearLayout android:layout_width="fill_parent"
+		        android:layout_height="@dimen/ledControlRowHight"
+		        android:orientation="horizontal"
+		        android:layout_marginTop="8dp"
+		        android:background="@drawable/shape">
+		        
+		        <TextView android:id="@+id/group1Tv"
+		            android:layout_height="fill_parent"
+		            android:layout_width="0dip"
+		            android:layout_weight="1.0"
+		            android:text="@string/ledGroup1"
+		            style="@style/ledTextStyle"/>
+		        
+		        <TextView android:id="@+id/group2Tv"
+		            android:layout_height="fill_parent"
+		            android:layout_width="0dip"
+		            android:layout_weight="1.0"
+		            style="@style/ledTextStyle"
+		            android:text="@string/ledGroup2"/>
+		        
+		        <TextView android:id="@+id/group3Tv"
+		            android:layout_height="fill_parent"
+		            android:layout_width="0dip"
+		            android:layout_weight="1.0"
+		            android:text="@string/ledGroup3"
+		            style="@style/ledTextStyle"/>
+		        
+		        <TextView android:id="@+id/group4Tv"
+		            android:layout_height="fill_parent"
+		            android:layout_width="0dip"
+		            android:layout_weight="1.0"
+		            style="@style/ledTextStyle"
+		            android:text="@string/ledGroup4"/>
+		        
+		    </LinearLayout>
+		    
+		    <!-- 亮度 -->
+		    <TextView android:id="@+id/brightnessTv"
+		        android:layout_height="@dimen/ledControlRowHight"
+		        android:layout_width="fill_parent"
+		        android:layout_marginTop="8dp"
+		        android:background="@drawable/brightness"/>
+		    
+		    <!-- 色温 -->
+		    <TextView android:id="@+id/colorTempTv"
+		        android:layout_height="@dimen/ledControlRowHight"
+		        android:layout_width="fill_parent"
+		        android:layout_marginTop="8dp"
+		        android:background="@drawable/color_temp"/>
+		    
+		    <!-- 延时关灯 -->
+		    <TextView android:id="@+id/delayCloseTv"
+		        android:layout_height="@dimen/ledControlRowHight"
+		        android:layout_width="fill_parent"
+		        android:layout_marginTop="8dp"
+		        android:text="延时关灯：30分钟"
+		        android:gravity="left|center_vertical"
+		        android:paddingLeft="15dip"
+		        style="@style/ledTextStyle"
+		        android:background="@drawable/shape"/>
+		    
+		    <!-- 定时开灯 -->
+		    <TextView android:id="@+id/timingOpenTv"
+		        android:layout_height="@dimen/ledControlRowHight"
+		        android:layout_width="fill_parent"
+		        android:layout_marginTop="8dp"
+		        android:text="定时开灯：18:30"
+		        android:gravity="left|center_vertical"
+		        android:paddingLeft="15dip"
+		        style="@style/ledTextStyle"
+		        android:background="@drawable/shape"/>
+		    
+		    <!-- 定时关灯 -->
+		    <TextView android:id="@+id/timingCloseTv"
+		        android:layout_height="@dimen/ledControlRowHight"
+		        android:layout_width="fill_parent"
+		        android:layout_marginTop="8dp"
+		        android:text="定时关灯：18:30"
+		        android:gravity="left|center_vertical"
+		        android:paddingLeft="15dip"
+		        style="@style/ledTextStyle"
+		        android:background="@drawable/shape"/>
+		    
+		    
+		    <!-- 闪烁模式-->
+		    <LinearLayout android:layout_width="fill_parent"
+		        android:layout_height="@dimen/ledControlRowHight"
+		        android:layout_marginTop="8dp"
+		        android:orientation="horizontal"
+		        android:background="@drawable/shape">
+		        
+		        <TextView android:id="@+id/falsh1Tv"
+		            android:layout_height="fill_parent"
+		            android:layout_width="0dip"
+		            android:layout_weight="1.0"
+		            style="@style/ledTextStyle"
+		            android:text="@string/falsh1"/>
+		        
+		        <TextView android:id="@+id/falsh2Tv"
+		            android:layout_height="fill_parent"
+		            android:layout_width="0dip"
+		            android:layout_weight="1.0"
+		            style="@style/ledTextStyle"
+		            android:text="@string/falsh2"/>
+		        
+		        <TextView android:id="@+id/falsh3Tv"
+		            android:layout_height="fill_parent"
+		            android:layout_width="0dip"
+		            android:layout_weight="1.0"
+		            style="@style/ledTextStyle"
+		            android:text="@string/falsh3"/>
+		        
+		        <TextView android:id="@+id/falsh4Tv"
+		            android:layout_height="fill_parent"
+		            android:layout_width="0dip"
+		            android:layout_weight="1.0"
+		            style="@style/ledTextStyle"
+		            android:text="@string/falsh4"/>
+		        
+		        <TextView android:id="@+id/falsh5Tv"
+		            android:layout_height="fill_parent"
+		            android:layout_width="0dip"
+		            android:layout_weight="1.0"
+		            style="@style/ledTextStyle"
+		            android:text="@string/falsh5"/>
+		        
+		        <TextView android:id="@+id/falsh6Tv"
+		            android:layout_height="fill_parent"
+		            android:layout_width="0dip"
+		            android:layout_weight="1.0"
+		            style="@style/ledTextStyle"
+		            android:text="@string/falsh6"/>
+		        
+		    </LinearLayout>
+		    
+		    <!-- 色彩选择器 -->
+		    <ImageView android:id="@+id/colorSeletorIv"
+		        android:layout_width="fill_parent"
+		        android:layout_height="wrap_content"
+		        android:layout_marginTop="8dp"
+		        android:contentDescription="@string/colorSelectorDescription"
+		        android:background="@drawable/color_seletor"/>
+		    
+			</LinearLayout>
+	
+	  </ScrollView>	
+
+</LinearLayout>

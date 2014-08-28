@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingLeft="10dip"
+    android:paddingRight="10dip"
+    android:paddingTop="8dip"
+    android:paddingBottom="8dip">
+    
+    <ImageView android:id="@+id/ledPowerBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:background="@drawable/led_opend"/>
+
+    <RelativeLayout android:id="@+id/detailslayout" 
+        android:layout_width="0dip"
+        android:layout_height="match_parent"
+        android:layout_weight="1.0"
+        android:layout_marginLeft="15dip">
+        
+        <LinearLayout android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:orientation="horizontal">
+            
+            <TextView android:id="@+id/ledNameTv"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginRight="10dip"
+	            android:textColor="@color/black"
+	            android:text="大厅灯"
+	            android:textSize="16sp" />
+            
+            <TextView android:id="@+id/ledLightTv"
+                style="@style/ledmainTextStyle"
+                android:text="亮度：70%"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            
+            <TextView android:id="@+id/ledTempTv"
+                android:layout_marginLeft="10dip"
+                android:text="色温：6500k"
+                style="@style/ledmainTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            
+        </LinearLayout>
+        
+        <LinearLayout android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dip"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+            
+            <TextView android:id="@+id/timingOpenLedTv"
+                android:text="定时关灯：关"
+                style="@style/ledmainTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            
+            <TextView android:id="@+id/timingCloseLedTv"
+                android:layout_marginLeft="10dip"
+                android:text="定时关灯：关"
+                style="@style/ledmainTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            
+            <TextView android:id="@+id/delayCloseLedTv"
+                android:layout_marginLeft="10dip"
+                android:text="延时关灯：关"
+                style="@style/ledmainTextStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            
+        </LinearLayout>
+        
+    </RelativeLayout>
+    
+    <Button android:id="@+id/deleteBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:visibility="gone"
+        android:text="@string/delete"
+        android:textColor="@color/white"
+        android:background="@color/read"/>
+    
+</LinearLayout>

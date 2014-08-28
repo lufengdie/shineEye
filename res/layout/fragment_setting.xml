@@ -1,0 +1,76 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/lightGray">
+
+    <RelativeLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:background="@color/lightBlue">
+        
+        <!-- 
+        <Button android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="30dip"
+            android:onClick="onClick"/>
+         -->
+        
+        <TextView android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerInParent="true"
+	        android:text="@string/titleSetting"
+	        style="@style/titleTextStyle"/>
+        
+    </RelativeLayout>
+    
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        
+        <LinearLayout android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_horizontal"
+            android:padding="10dip"
+            android:layout_marginTop="30dip"
+            android:layout_marginBottom="30dip"
+            android:orientation="horizontal">
+            
+            <ImageView android:layout_width="156dp"
+                android:layout_height="100dp"
+                android:src="@drawable/logo"/>
+            
+            <LinearLayout android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dip"
+                android:orientation="vertical">
+                
+                <TextView android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:textColor="@color/green"
+	                android:textSize="16sp"
+	                android:text="@string/appName"/>
+	            
+	            <TextView android:layout_width="wrap_content"
+	                android:layout_height="wrap_content"
+	                android:textColor="@color/green"
+	                android:textSize="16sp"
+	                android:text="@string/appNameChinese"/>
+                
+            </LinearLayout>
+            
+            
+        </LinearLayout>
+        
+        <ListView android:id="@+id/settingListView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+            
+        </ListView>
+        
+    </LinearLayout>
+    
+</LinearLayout>

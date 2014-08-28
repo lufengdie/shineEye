@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    
+    
+    <!-- 白色 -->
+    <color name="white">#ffffff</color>
+    
+    <!-- 黑色 -->
+    <color name="black">#000000</color>
+    
+    <!-- 红色 -->
+    <color name="read">#ff0000</color>
+    
+    
+    
+    <!-- 全透明 -->
+    <color name="transparent">#00000000</color>
+
+    
+    
+    <!-- 皇室蓝 -->
+    <color name="royalBlue">#4779f9</color>
+    
+    <!-- 海军蓝  -->
+    <color name="navyBlue">#003366</color>
+    
+    <!-- 浅蓝色-->
+    <color name="lightBlue">#76c5f0</color>
+    
+    
+    
+    
+    <!--  淡灰  -->
+    <color name="lightGray">#F0F0F0</color>
+    
+    <!-- 银灰 -->
+    <color name="silverGray">#CCCCCC</color>
+    
+    
+    <!-- 绿色 -->
+    <color name="green">#4fb248</color>
+    
+    
+</resources>

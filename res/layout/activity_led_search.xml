@@ -1,0 +1,50 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <RelativeLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/lightBlue"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip">
+        
+        <TextView android:layout_width="fill_parent"
+	        android:layout_height="wrap_content"
+	        android:padding="10dip"
+	        android:gravity="center"
+	        android:text="@string/titleLedSearch"
+	        style="@style/titleTextStyle"/>
+		
+        <TextView android:id="@+id/backBtn"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentLeft="true"
+		    android:layout_centerVertical="true"
+		    android:drawableLeft="@drawable/arrow_left"
+		    android:gravity="center"
+		    android:textColor="@color/white"
+		    android:text="@string/titleLed"/>
+		
+		<Button android:id="@+id/updateBtn"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:onClick="onClick"
+		    android:layout_alignParentRight="true"
+		    android:layout_centerVertical="true"
+		    android:text="@string/update"
+		    android:textColor="@color/white"
+		    android:background="@color/transparent"/>
+        
+    </RelativeLayout>
+    
+    <ListView android:id="@+id/ledListView"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1.0"
+        android:dividerHeight="1px"
+        android:divider="@color/silverGray">
+    </ListView>
+    
+</LinearLayout>

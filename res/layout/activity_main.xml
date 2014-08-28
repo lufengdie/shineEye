@@ -1,0 +1,28 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <TextView android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:gravity="center"
+        android:text="@string/titleLed"
+        style="@style/titleTextStyle"
+        android:background="@color/lightBlue"/>
+    
+    <ListView android:id="@+id/ledListView"
+        android:layout_width="fill_parent"
+        android:layout_height="0dip"
+        android:layout_weight="1.0"
+        android:dividerHeight="1px"
+        android:divider="@color/silverGray">
+    </ListView>
+
+    <FrameLayout android:id="@+id/buttonMenuLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+    </FrameLayout>
+    
+</LinearLayout>

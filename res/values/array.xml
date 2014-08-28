@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <!-- led灯名称数组 -->
+    <string-array name="ledNameArray">
+        <item>大厅灯</item>
+        <item>小厅灯</item>
+        <item>餐厅灯</item>
+        <item>厨房灯</item>
+        <item>走廊灯</item>
+        <item>楼梯灯</item>
+        <item>阳台灯</item>
+        <item>情景灯</item>
+        <item>主卧灯</item>
+        <item>卧室灯</item>
+        <item>童房灯</item>
+        <item>客房灯</item>
+        <item>书房灯</item>
+        <item>台灯</item>
+        <item>工作灯</item>
+        <item>浴室灯</item>
+        <item>路灯</item>
+        <item>大门灯</item>
+        <item>车库灯</item>
+        <item>厕所灯</item>
+        <item>落地灯</item>
+        <item>天花灯</item>
+        <item>水晶灯</item>
+        <item>蜡烛灯</item>
+    </string-array>
+    
+    
+    <string-array name="settingNames">
+        <item>操作说明</item>
+        <item>设置密码</item>
+        <item>认证手机</item>
+        <item>识别设备</item>
+        <item>关于我们</item>
+    </string-array>
+    
+</resources>

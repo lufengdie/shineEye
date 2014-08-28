@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <LinearLayout android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/lightBlue">
+        
+        <Button android:id="@+id/leftButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ledTextStyle"
+            android:padding="5dip"
+            android:text="@string/cancel"
+            android:background="@color/transparent"/>
+        
+        <TextView android:layout_width="0dip"
+            android:layout_weight="1.0"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/titleSetTimingOpen"/>
+        
+        <Button android:id="@+id/rightButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/ledTextStyle"
+            android:padding="5dip"
+            android:text="@string/save"
+            android:background="@color/transparent"/>
+        
+    </LinearLayout>
+
+    <LinearLayout android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_centerInParent="true">
+        
+        <EditText android:id="@+id/hoursEt"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dip"
+	        android:textSize="22sp"
+	        android:inputType="phone"
+	        android:digits="0,1,2,3,4,5,6,7,8,9"
+	        android:ems="2"
+	        android:maxLength="2"/>
+	    
+	    <TextView android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:textSize="22sp"
+	        android:text="@string/hours"/>
+        
+        <EditText android:id="@+id/minutesEt"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dip"
+	        android:textSize="22sp"
+	        android:inputType="phone"
+	        android:digits="0,1,2,3,4,5,6,7,8,9"
+	        android:ems="2"
+	        android:maxLength="2"/>
+	    
+	    <TextView android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:textSize="22sp"
+	        android:text="@string/minutes"/>
+        
+    </LinearLayout>
+    
+</RelativeLayout>
