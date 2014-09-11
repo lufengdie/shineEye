@@ -2,10 +2,14 @@
 
     <style name="ledTextStyle">
         <item name="android:textColor">@color/led_text_selector</item>
-        <item name="android:onClick">onClick</item>
         <item name="android:clickable">true</item>
         <item name="android:gravity">center</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:background">@color/transparent</item>
+    </style>
+    
+    <style name="ledControlSendStyle" parent="@style/ledTextStyle">
+        <item name="android:onClick">onClick</item>
     </style>
 
     <style name="ledmainTextStyle">

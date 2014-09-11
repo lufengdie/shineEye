@@ -1,9 +1,14 @@
 
 package com.shineeye.www.page;
 
+import com.shineeye.www.R;
+import com.shineeye.www.SocketService;
+
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -14,13 +19,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.shineeye.www.R;
-import com.shineeye.www.SocketService;
 
 /**
  * @Class Name : LedControlActivity
@@ -29,9 +32,9 @@ import com.shineeye.www.SocketService;
  * @Date 2014年6月18日 下午3:08:37
  */
 public class LedControlActivity extends FragmentActivity implements OnClickListener,
-        OnTouchListener{
+        OnTouchListener {
 
-	private TextView ledPowerTv;
+    private TextView ledPowerTv;
     private TextView brightnessTv;
     private TextView colorTempTv;
     private TextView delayCloseTv;
@@ -40,21 +43,23 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
     private TextView ledControlNameTv;
     private LedParameter led;
     private PopupWindow popupWindow;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_led_control);
+        context = this;
         initData();
         initUI();
     }
-    
-    private void initData(){
-    	led = (LedParameter) getIntent().getSerializableExtra("led");
+
+    private void initData() {
+        led = (LedParameter) getIntent().getSerializableExtra("led");
     }
 
     private void initUI() {
-    	ledPowerTv = (TextView) findViewById(R.id.ledPowerTv);
+        ledPowerTv = (TextView) findViewById(R.id.ledPowerTv);
         colorTempTv = (TextView) findViewById(R.id.colorTempTv);
         brightnessTv = (TextView) findViewById(R.id.brightnessTv);
         delayCloseTv = (TextView) findViewById(R.id.delayCloseTv);
@@ -65,57 +70,32 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
         colorTempTv.setOnTouchListener(this);
         findViewById(R.id.colorSeletorIv).setOnTouchListener(this);
         findViewById(R.id.backBtn).setOnClickListener(this);
-        
+
         ledControlNameTv.setText(led.getLedName());
+
+        findViewById(R.id.delayCloseTv).setOnClickListener(selectorListener);
+        findViewById(R.id.timingOpenTv).setOnClickListener(selectorListener);
+        findViewById(R.id.timingCloseTv).setOnClickListener(selectorListener);
+        findViewById(R.id.backBtn).setOnClickListener(selectorListener);
+        findViewById(R.id.addBtn).setOnClickListener(selectorListener);
     }
 
     @Override
     public void onClick(View view) {
-
-    	switch (view.getId()) {
-
-        case R.id.delayCloseTv:
-        	startActivity(new Intent(this, SetSleepTimeActivity.class));
-        	break;
-        	
-        case R.id.timingOpenTv:
-        	startActivity(new Intent(this, SetTimingOpenActivity.class));
-        	break;
-        	
-        case R.id.timingCloseTv:
-        	startActivity(new Intent(this, SetTimingCloseActivity.class));
-        	break;
-    	
-		case R.id.backBtn:
-			finish();
-			break;
-			
-		case R.id.addBtn:
-			Intent intent = new Intent(this, LedSearchActivity.class);
-			intent.putExtra("led", led);
-			startActivity(intent);
-			break;
-
-		case R.id.ledPowerTv:
-			if (SocketService.getInstance().sendMessage("test", sendHandler, getMessage(ledPowerTv.getId()))) {
-				ledPowerTv.setTextColor(Color.RED);
-				ledPowerTv.setClickable(false);
-			}else{
-				Toast.makeText(this, "正在发送其他命令，请稍后!", Toast.LENGTH_LONG).show();
-			}
-			break;
-			
-		default:
-			break;
-		}
+        if (SocketService.getInstance().sendMessage("test", sendHandler, getMessage(view.getId()))) {
+            ((TextView) view).setTextColor(Color.RED);
+            view.setClickable(false);
+        } else {
+            Toast.makeText(this, "正在发送其他命令，请稍后!", Toast.LENGTH_SHORT).show();
+        }
     }
-    
-    private Message getMessage(int resId){
-    	Message msg = new Message();
-    	Bundle data = new Bundle();
-    	data.putInt("resId", resId);
-    	msg.setData(data);
-    	return msg;
+
+    private Message getMessage(int resId) {
+        Message msg = new Message();
+        Bundle data = new Bundle();
+        data.putInt("resId", resId);
+        msg.setData(data);
+        return msg;
     }
 
     @Override
@@ -129,7 +109,7 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
 
                 float brightnessX = event.getX();
                 System.out.println("brightnessTv x坐标：" + brightnessX);
-                showPopWindow(findViewById(R.id.colorSeletorIv), "未知", (int)brightnessX);
+                showPopWindow(findViewById(R.id.brightnessTv), "未知", (int) brightnessX);
                 break;
 
             case R.id.colorTempTv:
@@ -157,7 +137,6 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
         int b = Color.blue(color);
         System.out.println("r:" + r + ",g:" + g + ",b:" + b);
     }
-
 
     final static int Flag_show_sleep_time = 69;
     final static int Flag_show_timing_open = 96;
@@ -196,17 +175,17 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
 
         }
     };
-    
-    private Handler sendHandler = new Handler (){
-    	public void handleMessage(Message msg) {
-    		Bundle data = msg.getData();
-    		String result = data.getString("result");
-    		int resId = data.getInt("resId");
-    		TextView view = (TextView)findViewById(resId);
-    		view.setTextColor(Color.WHITE);
-    		view.setClickable(true);
-    		Toast.makeText(LedControlActivity.this, result, Toast.LENGTH_LONG).show();
-    	};
+
+    private Handler sendHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            Bundle data = msg.getData();
+            String result = data.getString("result");
+            int resId = data.getInt("resId");
+            TextView view = (TextView) findViewById(resId);
+            view.setTextColor(Color.WHITE);
+            view.setClickable(true);
+            Toast.makeText(LedControlActivity.this, result, Toast.LENGTH_LONG).show();
+        };
     };
 
     private String getTime(int formatId, int hours, int minutes) {
@@ -222,18 +201,55 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
         time = String.format(getString(formatId), hourStr, mintueStr);
         return time;
     }
-    
-    private void showPopWindow(View parent, String str, int x){
-    	TextView popTextView;
-    	if (popupWindow == null) {
-    		popTextView = (TextView) LayoutInflater.from(this).inflate(R.layout.pop_window_led_control, null);
-    		popupWindow = new PopupWindow(popTextView, 100, 100);
-    		popupWindow.setContentView(popTextView);
-		}else{
-			popTextView = (TextView) popupWindow.getContentView();
-		}
-    	popTextView.setText(str);
-    	popupWindow.showAtLocation(parent, Gravity.NO_GRAVITY, 0, 0);
+
+    private void showPopWindow(View parent, String str, int x) {
+        TextView popTextView;
+        if (popupWindow == null) {
+            popTextView = (TextView) LayoutInflater.from(this).inflate(
+                    R.layout.pop_window_led_control, null);
+            popupWindow = new PopupWindow(popTextView, ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT, true);
+            popupWindow.setBackgroundDrawable(new BitmapDrawable());
+        } else {
+            popTextView = (TextView) popupWindow.getContentView();
+        }
+        popTextView.setText(str);
+        int[] location = new int[2];
+        parent.getLocationOnScreen(location);
+        popupWindow.showAtLocation(parent, Gravity.NO_GRAVITY, x, location[1] - parent.getHeight());
     }
-    
+
+    private OnClickListener selectorListener = new OnClickListener() {
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.delayCloseTv:
+                    startActivity(new Intent(context, SetSleepTimeActivity.class));
+                    break;
+
+                case R.id.timingOpenTv:
+                    startActivity(new Intent(context, SetTimingOpenActivity.class));
+                    break;
+
+                case R.id.timingCloseTv:
+                    startActivity(new Intent(context, SetTimingCloseActivity.class));
+                    break;
+
+                case R.id.backBtn:
+                    finish();
+                    break;
+
+                case R.id.addBtn:
+                    Intent intent = new Intent(context, LedSearchActivity.class);
+                    intent.putExtra("led", led);
+                    startActivity(intent);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    };
+
 }

@@ -58,13 +58,13 @@
 		            android:layout_width="0dip"
 		            android:layout_weight="1.0"
 		            android:text="@string/ledPower"
-		            style="@style/ledTextStyle"/>
+		            style="@style/ledControlSendStyle"/>
 		        
 		        <TextView android:id="@+id/ledNightlightTv"
 		            android:layout_height="fill_parent"
 		            android:layout_width="0dip"
 		            android:layout_weight="1.0"
-		            style="@style/ledTextStyle"
+		            style="@style/ledControlSendStyle"
 		            android:text="@string/ledNightlight"/>
 		        
 		    </LinearLayout>
@@ -81,13 +81,13 @@
 		            android:layout_width="0dip"
 		            android:layout_weight="1.0"
 		            android:text="@string/ledGroup1"
-		            style="@style/ledTextStyle"/>
+		            style="@style/ledControlSendStyle"/>
 		        
 		        <TextView android:id="@+id/group2Tv"
 		            android:layout_height="fill_parent"
 		            android:layout_width="0dip"
 		            android:layout_weight="1.0"
-		            style="@style/ledTextStyle"
+		            style="@style/ledControlSendStyle"
 		            android:text="@string/ledGroup2"/>
 		        
 		        <TextView android:id="@+id/group3Tv"
@@ -95,13 +95,13 @@
 		            android:layout_width="0dip"
 		            android:layout_weight="1.0"
 		            android:text="@string/ledGroup3"
-		            style="@style/ledTextStyle"/>
+		            style="@style/ledControlSendStyle"/>
 		        
 		        <TextView android:id="@+id/group4Tv"
 		            android:layout_height="fill_parent"
 		            android:layout_width="0dip"
 		            android:layout_weight="1.0"
-		            style="@style/ledTextStyle"
+		            style="@style/ledControlSendStyle"
 		            android:text="@string/ledGroup4"/>
 		        
 		    </LinearLayout>
@@ -165,42 +165,42 @@
 		            android:layout_height="fill_parent"
 		            android:layout_width="0dip"
 		            android:layout_weight="1.0"
-		            style="@style/ledTextStyle"
+		            style="@style/ledControlSendStyle"
 		            android:text="@string/falsh1"/>
 		        
 		        <TextView android:id="@+id/falsh2Tv"
 		            android:layout_height="fill_parent"
 		            android:layout_width="0dip"
 		            android:layout_weight="1.0"
-		            style="@style/ledTextStyle"
+		            style="@style/ledControlSendStyle"
 		            android:text="@string/falsh2"/>
 		        
 		        <TextView android:id="@+id/falsh3Tv"
 		            android:layout_height="fill_parent"
 		            android:layout_width="0dip"
 		            android:layout_weight="1.0"
-		            style="@style/ledTextStyle"
+		            style="@style/ledControlSendStyle"
 		            android:text="@string/falsh3"/>
 		        
 		        <TextView android:id="@+id/falsh4Tv"
 		            android:layout_height="fill_parent"
 		            android:layout_width="0dip"
 		            android:layout_weight="1.0"
-		            style="@style/ledTextStyle"
+		            style="@style/ledControlSendStyle"
 		            android:text="@string/falsh4"/>
 		        
 		        <TextView android:id="@+id/falsh5Tv"
 		            android:layout_height="fill_parent"
 		            android:layout_width="0dip"
 		            android:layout_weight="1.0"
-		            style="@style/ledTextStyle"
+		            style="@style/ledControlSendStyle"
 		            android:text="@string/falsh5"/>
 		        
 		        <TextView android:id="@+id/falsh6Tv"
 		            android:layout_height="fill_parent"
 		            android:layout_width="0dip"
 		            android:layout_weight="1.0"
-		            style="@style/ledTextStyle"
+		            style="@style/ledControlSendStyle"
 		            android:text="@string/falsh6"/>
 		        
 		    </LinearLayout>

@@ -1,6 +1,8 @@
 
 package com.shineeye.www.page;
 
+import com.shineeye.www.R;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,8 +15,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import com.shineeye.www.R;
 
 /**
  * @Class Name : LedControlFragment
@@ -34,53 +34,54 @@ public class SettingFragment extends Fragment implements OnClickListener, OnItem
         initUI(view);
         return view;
     }
-    
-    private void initUI(View view){
-    	settingListView = (ListView) view.findViewById(R.id.settingListView);
-    	String[] names = getResources().getStringArray(R.array.settingNames);
-    	ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.item_setting, R.id.settingName, names);
-    	settingListView.setAdapter(adapter);
-    	settingListView.setOnItemClickListener(this);
-    	
-//    	view.findViewById(R.id.backBtn).setOnClickListener(this);
+
+    private void initUI(View view) {
+        settingListView = (ListView) view.findViewById(R.id.settingListView);
+        String[] names = getResources().getStringArray(R.array.settingNames);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(context, R.layout.item_setting,
+                R.id.settingName, names);
+        settingListView.setAdapter(adapter);
+        settingListView.setOnItemClickListener(this);
+
+        // view.findViewById(R.id.backBtn).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
 
-    	switch (view.getId()) {
-    	
-			case R.id.backBtn:
-				
-				break;
-	
-			default:
-				break;
-		}
+        switch (view.getId()) {
+
+            case R.id.backBtn:
+
+                break;
+
+            default:
+                break;
+        }
     }
 
-	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-		switch (arg2) {
-		case 0:
-			startActivity(new Intent(context, ManualActivity.class));
-			break;
-		case 1:
-			startActivity(new Intent(context, PasswordSettingActivity.class));
-			break;
-		case 2:
-			
-			break;
-		case 3:
-			
-			break;
-		case 4:
-			startActivity(new Intent(context, AboutUsActivity.class));
-			break;
+    @Override
+    public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+        switch (arg2) {
+            case 0:
+                startActivity(new Intent(context, ManualActivity.class));
+                break;
+            case 1:
+                startActivity(new Intent(context, PasswordSettingActivity.class));
+                break;
+            case 2:
 
-		default:
-			break;
-		}
-	}
+                break;
+            case 3:
+
+                break;
+            case 4:
+                startActivity(new Intent(context, AboutUsActivity.class));
+                break;
+
+            default:
+                break;
+        }
+    }
 
 }
