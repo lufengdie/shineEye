@@ -82,7 +82,7 @@ public class EnvironmentShare {
                     + LOG_FILE_NAME_PREFIX + dataTime + LOG_FILE_NAME_SUFFIX);
             if (!logFile.exists()) {
                 if (logFile.createNewFile()) {
-                    deleteEarliestLog(logDirFile, logFile);
+//                    deleteEarliestLog(logDirFile, logFile);
                 } else {
                     // Logger.i("创建日志文件失败！");
                     return null;

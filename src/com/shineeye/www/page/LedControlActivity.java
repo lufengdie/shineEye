@@ -8,17 +8,19 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-import android.view.GestureDetector;
-import android.view.GestureDetector.OnGestureListener;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.widget.ImageView;
+import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.shineeye.www.R;
+import com.shineeye.www.SocketService;
 
 /**
  * @Class Name : LedControlActivity
@@ -27,17 +29,17 @@ import com.shineeye.www.R;
  * @Date 2014年6月18日 下午3:08:37
  */
 public class LedControlActivity extends FragmentActivity implements OnClickListener,
-        OnTouchListener, OnGestureListener {
+        OnTouchListener{
 
+	private TextView ledPowerTv;
     private TextView brightnessTv;
     private TextView colorTempTv;
     private TextView delayCloseTv;
     private TextView timingOpenTv;
     private TextView timingCloseTv;
     private TextView ledControlNameTv;
-    private GestureDetector mygesture;
-    private SettingFragment ledControlFragment;
     private LedParameter led;
+    private PopupWindow popupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +54,7 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
     }
 
     private void initUI() {
+    	ledPowerTv = (TextView) findViewById(R.id.ledPowerTv);
         colorTempTv = (TextView) findViewById(R.id.colorTempTv);
         brightnessTv = (TextView) findViewById(R.id.brightnessTv);
         delayCloseTv = (TextView) findViewById(R.id.delayCloseTv);
@@ -62,8 +65,6 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
         colorTempTv.setOnTouchListener(this);
         findViewById(R.id.colorSeletorIv).setOnTouchListener(this);
         findViewById(R.id.backBtn).setOnClickListener(this);
-        // 构建手势探测器
-        mygesture = new GestureDetector(this);
         
         ledControlNameTv.setText(led.getLedName());
     }
@@ -95,9 +96,26 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
 			startActivity(intent);
 			break;
 
+		case R.id.ledPowerTv:
+			if (SocketService.getInstance().sendMessage("test", sendHandler, getMessage(ledPowerTv.getId()))) {
+				ledPowerTv.setTextColor(Color.RED);
+				ledPowerTv.setClickable(false);
+			}else{
+				Toast.makeText(this, "正在发送其他命令，请稍后!", Toast.LENGTH_LONG).show();
+			}
+			break;
+			
 		default:
 			break;
 		}
+    }
+    
+    private Message getMessage(int resId){
+    	Message msg = new Message();
+    	Bundle data = new Bundle();
+    	data.putInt("resId", resId);
+    	msg.setData(data);
+    	return msg;
     }
 
     @Override
@@ -111,6 +129,7 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
 
                 float brightnessX = event.getX();
                 System.out.println("brightnessTv x坐标：" + brightnessX);
+                showPopWindow(findViewById(R.id.colorSeletorIv), "未知", (int)brightnessX);
                 break;
 
             case R.id.colorTempTv:
@@ -139,50 +158,6 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
         System.out.println("r:" + r + ",g:" + g + ",b:" + b);
     }
 
-    @Override
-    public boolean onDown(MotionEvent arg0) {
-        return false;
-    }
-
-    @Override
-    public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        return false;
-    }
-
-    @Override
-    public void onLongPress(MotionEvent arg0) {
-
-    }
-
-    @Override
-    public boolean onScroll(MotionEvent arg0, MotionEvent arg1, float arg2, float arg3) {
-        return false;
-    }
-
-    @Override
-    public void onShowPress(MotionEvent arg0) {
-
-    }
-
-    @Override
-    public boolean onSingleTapUp(MotionEvent arg0) {
-        return false;
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return mygesture.onTouchEvent(event);
-    }
-
-    private void hideFragment() {
-        if (ledControlFragment == null) {
-            return;
-        } else if (ledControlFragment.isVisible()) {
-            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-            transaction.hide(ledControlFragment);
-            transaction.commit();
-        }
-    }
 
     final static int Flag_show_sleep_time = 69;
     final static int Flag_show_timing_open = 96;
@@ -221,6 +196,18 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
 
         }
     };
+    
+    private Handler sendHandler = new Handler (){
+    	public void handleMessage(Message msg) {
+    		Bundle data = msg.getData();
+    		String result = data.getString("result");
+    		int resId = data.getInt("resId");
+    		TextView view = (TextView)findViewById(resId);
+    		view.setTextColor(Color.WHITE);
+    		view.setClickable(true);
+    		Toast.makeText(LedControlActivity.this, result, Toast.LENGTH_LONG).show();
+    	};
+    };
 
     private String getTime(int formatId, int hours, int minutes) {
         String time = "";
@@ -234,6 +221,19 @@ public class LedControlActivity extends FragmentActivity implements OnClickListe
         }
         time = String.format(getString(formatId), hourStr, mintueStr);
         return time;
+    }
+    
+    private void showPopWindow(View parent, String str, int x){
+    	TextView popTextView;
+    	if (popupWindow == null) {
+    		popTextView = (TextView) LayoutInflater.from(this).inflate(R.layout.pop_window_led_control, null);
+    		popupWindow = new PopupWindow(popTextView, 100, 100);
+    		popupWindow.setContentView(popTextView);
+		}else{
+			popTextView = (TextView) popupWindow.getContentView();
+		}
+    	popTextView.setText(str);
+    	popupWindow.showAtLocation(parent, Gravity.NO_GRAVITY, 0, 0);
     }
     
 }
